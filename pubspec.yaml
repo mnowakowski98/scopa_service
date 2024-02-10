@@ -1,7 +1,8 @@
 name: scopa_service
 description: An absolute bare-bones web app.
 version: 0.1.0
-# repository: https://github.com/my_org/my_repo
+publish_to: none
+repository: https://github.com/mnowakowski98/scopa_service
 
 environment:
   sdk: ^3.2.5
@@ -9,11 +10,16 @@ environment:
 dependencies:
   shelf: ^1.4.1
   shelf_web_socket: ^1.0.4
+  scopa_lib:
+    git: https://github.com/mnowakowski98/scopa_lib
   uuid: ^4.3.3
   web_socket_channel: ^2.4.3
+  json_annotation: ^4.8.1
+  stream_channel: ^2.1.2
 
 dev_dependencies:
   build_runner: ^2.4.0
   build_web_compilers: ^4.0.0
+  json_serializable: ^6.7.1
   lints: ^3.0.0
   test: ^1.21.0
