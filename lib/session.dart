@@ -29,8 +29,13 @@ class Session {
 
     final response =
         jsonEncode(SessionJoinResponse(players: _players.values).toJson());
-
     channel.sink.add(response);
+  }
+
+  bool hasChannel(StreamChannel channel) => _players[channel] != null;
+
+  void execute(String command, Map<String, dynamic> json) {
+    throw UnimplementedError();
   }
 
   @override
