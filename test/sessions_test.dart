@@ -23,7 +23,7 @@ void main() {
       });
     });
 
-    test('sends a lobbystate on session join', () async {
+    test('sends a list of players on session join', () {
       final manager = SessionManager();
       final createController = StreamChannelController<String>();
       final joinController = StreamChannelController<String>();
@@ -37,11 +37,13 @@ void main() {
 
       createController.local.stream.listen((data) {
         final message = SessionCreateResponse.fromJson(jsonDecode(data));
+
         final joinCommand =
             SessionJoin(sessionId: message.sessionId, playerName: 'Test Join')
                 .toJson();
         joinCommand['command'] = 'join';
         joinController.local.sink.add(jsonEncode(joinCommand));
+
         joinController.local.stream.listen((joinData) {
           final joinMessage =
               SessionJoinResponse.fromJson(jsonDecode(joinData));
