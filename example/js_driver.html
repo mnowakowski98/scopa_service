@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scopa Service example js driver</title>
+</head>
+<body>
+    <button type="button" onclick="connect()">Connect</button>
+    <button type="button" onclick="create()">Create</button>
+
+    <input type="text" id="sessionId">
+    <input type="text" id="playerName">
+    <button type="button" onclick="join()">Join</button>
+
+    <script>
+        let ws;
+
+        function connect() {
+            if (ws != null && (ws.readyState == 0 || ws.readyState == 1)) ws.close()
+            ws = new WebSocket('ws://localhost:3000')
+            ws.onopen = () => console.log('connected')
+            ws.onclose = () => console.log('closing')
+            ws.onmessage = (event) => console.log(event.data)
+        }
+
+        function create() {
+            ws.send(JSON.stringify({
+                command: 'create',
+                playerName: document.querySelector('#playerName').value
+            }))
+        }
+
+        function join() {
+            ws.send(JSON.stringify({
+                command: 'join',
+                sessionId: document.querySelector('#sessionId').value,
+                playerName: document.querySelector('#playerName').value
+            }))
+        }
+
+
+    </script>
+</body>
+</html>
