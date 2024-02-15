@@ -29,7 +29,10 @@ class Session {
 
     final response =
         jsonEncode(SessionJoinResponse(players: _players.values).toJson());
-    channel.sink.add(response);
+
+    for (final playerChannel in _players.keys) {
+      playerChannel.sink.add(response);
+    }
   }
 
   bool hasChannel(StreamChannel channel) => _players[channel] != null;
